@@ -27,14 +27,17 @@ In Fastai, the process of fine-tuning a vision classification model typically in
 
 3. **Tune the model**: Using the `fine_tune()` method of `vision_learner`, we can adjust the weights of the pre-trained model to work on our particular dataset.
 
-4. **Freezing Initial Layers**: Freeze the initial layers of the model, preventing them from being updated during training. This step preserves the pre-trained weights and allows the model to focus on adapting the later layers to the new dataset. You can use the `freeze` method of the `Learner` object to freeze the initial layers.
-
-5. **Training**: Train the model using Fastai's `fit_one_cycle` or `fine_tune` method. This process optimizes the parameters of the unfrozen layers, gradually adapting the model to the new dataset while maintaining the knowledge learned from pre-training.
-
-6. **Gradual Unfreezing (Optional)**: After the initial training, you can perform gradual unfreezing by unfreezing a few more layers and training again. This step allows the model to fine-tune the previously frozen layers, updating their weights based on the target dataset.
-
-By following these steps, you can effectively apply fine-tuning in Fastai for vision classification problems, achieving improved performance by leveraging pre-trained models and adapting them to your specific dataset.
 
 ---
-
-Fine-tuning is a powerful technique in vision classification, allowing you to benefit from pre-trained models and achieve better results with reduced training time. With Fastai's comprehensive library and easy-to-use APIs, the process of fine-tuning becomes streamlined, enabling you to leverage pre-trained models and adapt them to your vision classification tasks
+## Example
+```python
+learn = vision_learner(dls, resnet18, metrics=error_rate)
+learn.fine_tune(3)
+```
+Output:
+epoch	| train_loss | valid_loss	| error_rate |	time
+0	| 0.606847	| 0.776637	| 0.240000	| 00:09
+epoch	| train_loss	| valid_loss	| error_rate	| time
+0	| 0.114463	| 0.045450	| 0.026667	| 00:03
+1	| 0.065541	| 0.009315	| 0.000000	| 00:02
+2	| 0.043300	| 0.007967	| 0.000000	| 00:02
